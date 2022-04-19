@@ -1,0 +1,28 @@
+---
+- hosts: vara-sys1
+  become: yes
+  tasks:
+    - name: To copy the script
+      copy: src=/root/script.sh dest=/tmp/
+    - name: To set the permissions
+      file: path=/tmp/script.sh owner=root group=root mode=0777
+    - name: To excute the script
+      shell: /bin/bash /tmp/script.sh
+    - name: To script output into another file-system
+      shell: sh /tmp/script.sh >> /opt/babu
+    - name: To install httpd package
+      package: name=httpd state=latest
+    - name: To start the service
+      service: name=httpd state=restarted
+    - name: To create file bheema
+      file: dest=/tmp/bheema state=touch mode=777
+    - name: To create direcory data
+      file: dest=/tmp/data state=directory mode=777
+    - name: To create a group
+      group: name=badam gid=1300 state=present
+    - name: To create a user
+      user: name=appu group=badam shell=/bin/bash createhome=yes
+    - name: To add in line fstab
+      lineinfile: dest=/etc/fstab line='10.10.10.10 /users ext4 defaults 0 0'
+    - name: To commands output
+      shell: "date;uptime;uname-a;df -h"

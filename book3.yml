@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  remote_user: ansible
+  become_user: root
+  tasks:
+   - name: To copy the script
+     copy: src=/tmp/scripts.sh dest=/tmp/
+   - name: To change permissions
+     file: path=/tmp/scripts.sh owner=root group=root mode=0777
+   - name: To excute the script
+     shell: /bin/bash /tmp/scripts.sh
+   - name: To script output into another file-system
+     shell: "sh /tmp/scripts.sh >> /opt/rama"

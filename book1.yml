@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  user: ansible
+  tasks:
+    - name: To install httpd
+      package: name="httpd" state="present"
+    - name: To strated service httpd
+      service: name="httpd" state="started"
